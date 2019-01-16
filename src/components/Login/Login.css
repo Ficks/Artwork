@@ -1,0 +1,39 @@
+.login_body {
+  width: 100%;
+  height: 100%;
+  background: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1546490680123&di=595a1872475b8cc0e89d54ce007d9491&imgtype=0&src=http%3A%2F%2Fatt.bbs.duowan.com%2Fforum%2F201707%2F23%2F141903is6q6ssjkf1e1ziq.jpg) no-repeat;
+  background-size: cover;
+}
+.login {
+  position: relative;
+  z-index: 999;
+  width: 500px;
+  margin: 0 auto;
+  background: #fff;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 4px;
+  top: 200px;
+}
+.login h1 {
+  text-align: center;
+  font-size: 30px;
+}
+.login .ant-form {
+  padding-right: 25px;
+}
+.login .ordi {
+  padding-left: 35px;
+}
+.login .ordi .login-form-forgot {
+  float: right;
+}
+.login .ant-btn-primary {
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  height: 40px;
+  line-height: 40px;
+}
