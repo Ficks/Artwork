@@ -2,6 +2,7 @@ import Axios from 'axios';
 import config from '@/config';
 
 import { createBrowserHistory } from 'history';
+import { message } from 'antd';
 import qs from 'querystring';
 
 
@@ -34,14 +35,26 @@ export default params => {
 
         // params.headers = { 'Content-Type': 'application/x-www-form-urlencoded' }
         instance(params).then(res => {
+            console.log(res);
             //请求成功后执行的函数
             if (res.data.code == 1) {
+                if (params.tips) {
+                    message.success(res.data.message);
+                }
                 resolve(res.data);
+            } else if (res.data.code = -99999) {
+                // 登录超时
+                message.error(res.data.message);
+                reject(res.data);
+                createBrowserHistory().push('/login');
+            } else {
+                // 失败后
+                reject(res.data);
+                message.error(res.data.message);
             }
         }).catch(err => {
             //失败后执行的函数
-            console.log('axios：失败');
-            createBrowserHistory().push('/login');
+            message.error('服务器开小差了！');
             console.log(err);
             reject(err);
         })

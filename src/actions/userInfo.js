@@ -1,8 +1,8 @@
-export const EDIT_ISLOGIN = "EDIT_ISLOGIN";
+export const ADD_USERINFO = "ADD_USERINFO";
 
-export function editIsLogin(val) {
+export function addUserInfo(val) {
     return {
-        type: EDIT_ISLOGIN,
+        type: ADD_USERINFO,
         payload: val
     }
 }

@@ -5,7 +5,7 @@ import {
 } from 'antd';
 
 import loginApi from '@/api/login';
-import { editIsLogin } from '../../actions/userInfo';
+import { ADD_USERINFO } from '@/redux/actions/userInfo';
 import "./Login.css"
 
 const formItemLayout = {
@@ -27,14 +27,13 @@ const FormItem = Form.Item;
 class NormalLoginForm extends Component {
     constructor(props) {
         super(props);
-
-
     }
 
     state = {
         isLoading: false
     }
 
+    // 登录
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -43,20 +42,20 @@ class NormalLoginForm extends Component {
 
                 //更改登录状态
                 this.setState({
-                    isLoading: true,
-                    userName: 'admin',
-                    passowrd: 123456
+                    isLoading: true
                 })
 
-                console.log(values.password)
                 loginApi.login({
                     uname: values.userName,
                     pwd: values.password
                 }).then(data => {
-                    this.props.editIsLogin(true);
-                    this.props.history.push('/');
+                    sessionStorage.setItem("userInfo", JSON.stringify(data.data));
+                    this.props.ADD_USERINFO(data.data);
+                    // this.props.history.push('/');
                 }, err => {
-                    console.log(err);
+                    this.setState({
+                        isLoading: false
+                    })
                 })
 
             }
@@ -119,12 +118,12 @@ const WrappedNormalLoginForm = Form.create()(NormalLoginForm);
 
 const mapStateToProps = state => {
     return {
-        isLogin: state.isLogin
+        userInfo: state.userInfo
     }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        editIsLogin: (...args) => dispatch(editIsLogin(...args))
+        ADD_USERINFO: (...args) => dispatch(ADD_USERINFO(...args))
     }
 }
 var LoginApp = connect(mapStateToProps, mapDispatchToProps)(WrappedNormalLoginForm)
