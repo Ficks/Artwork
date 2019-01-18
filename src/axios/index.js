@@ -44,13 +44,13 @@ export default params => {
                 resolve(res.data);
             } else if (res.data.code = -99999) {
                 // 登录超时
-                message.error(res.data.message);
+                message.warning(res.data.message);
                 reject(res.data);
                 createBrowserHistory().push('/login');
             } else {
                 // 失败后
                 reject(res.data);
-                message.error(res.data.message);
+                message.warning(res.data.message);
             }
         }).catch(err => {
             //失败后执行的函数
